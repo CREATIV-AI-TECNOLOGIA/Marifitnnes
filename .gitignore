@@ -1,0 +1,26 @@
+node_modules/
+dist/
+standalone/
+coverage/
+*.tsbuildinfo
+.vite/
+.env*
+!.env.example
+**/graphify-out/
+
+# Local workspace data
+/MEMORY.md
+/outputs/
+/uploads/
+
+# Unrelated Rastro and biolink projects in this workspace
+/Iniciar-Rastro.*
+/Rastro-*.md
+/rastro-assets/
+/rastro-notas.html
+/rastro-pwa.zip
+/rastro-server.mjs
+/rastro-sw.js
+/rastro.webmanifest
+/biolinkpro-builder.html
+/meu-biolink.html

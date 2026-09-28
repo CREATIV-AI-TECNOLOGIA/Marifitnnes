@@ -1,0 +1,35 @@
+.workouts-cycle{margin-bottom:22px;display:flex;flex-direction:column;gap:9px;max-width:360px}
+.workouts-cycle-select{font-weight:550}
+.workouts-list{display:flex;flex-direction:column;gap:13px}
+.workout-card{position:relative;padding:0;overflow:hidden}
+.workout-card-main{display:grid;grid-template-columns:78px 1fr auto;align-items:center;gap:16px;padding:15px 52px 15px 15px;min-height:96px}
+.workout-card-image{width:78px;height:66px;border-radius:11px;background-size:cover;background-position:center;background-color:var(--elevated);filter:grayscale(.15)}
+.workout-card-copy{display:flex;flex-direction:column;gap:5px;min-width:0}
+.workout-card-copy strong{font-size:17px}
+.workout-card-last{font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
+.workout-card-menu{position:absolute;top:12px;right:12px}
+.workouts-others{margin-top:32px}
+.workouts-others-list{display:flex;flex-direction:column;margin-top:12px;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--surface)}
+.workouts-other-item{display:flex;align-items:center;justify-content:space-between;min-height:52px;padding:13px 18px;font-size:13px;border-bottom:1px solid var(--line)}
+.workouts-other-item:last-child{border-bottom:0}
+.workouts-other-item:hover{background:var(--bg)}
+.workouts-menu{display:flex;flex-direction:column;gap:10px}
+.workout-detail-hero{position:relative;padding:26px;border:0;color:#fff;background-size:cover;background-position:center;background-color:#232823;min-height:210px;display:flex;flex-direction:column;justify-content:flex-end;margin-bottom:18px}
+.workout-detail-hero .eyebrow{color:#ffbda8}
+.workout-detail-hero h2{font-size:36px;margin:7px 0 14px}
+.workout-detail-meta{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:12px;color:#e2e6e0}
+.workout-detail-meta span{display:inline-flex;align-items:center;gap:6px}
+.workout-detail-list{list-style:none;padding:0;margin:0 0 100px;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--surface)}
+.workout-detail-list li{display:grid;grid-template-columns:34px 1fr auto;align-items:center;gap:14px;padding:15px 18px;border-bottom:1px solid var(--line)}
+.workout-detail-list li:last-child{border-bottom:0}
+.workout-detail-list strong{font-size:15px;font-weight:600}
+.workout-detail-index{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+@media(max-width:767px){.workout-card-main{grid-template-columns:66px 1fr auto;gap:12px;padding:13px 48px 13px 13px}.workout-card-image{width:66px;height:58px}.workout-detail-list{margin-bottom:110px}.workout-detail-hero{min-height:190px;padding:20px}.workout-detail-hero h2{font-size:30px}}
+.workout-card-main{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;padding:17px 56px 15px 18px;min-height:105px;align-items:center}
+.workout-card-copy strong{font-size:16px}.workout-card-copy p{margin:0}.workout-card-copy .row{justify-content:flex-start;gap:8px;flex-wrap:wrap}
+.workout-card-view{display:flex;align-items:center;gap:2px;color:var(--accent);font-size:11px;white-space:nowrap}
+.workout-detail-summary{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:0 0 25px;padding:16px 20px}
+.workout-detail-summary>div{display:flex;flex-direction:column;gap:5px}.workout-detail-summary strong{font-size:18px}.workout-detail-summary span{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.workout-detail-heading{margin:0 0 10px;gap:10px}.workout-detail-heading h2{margin:0}.workout-detail-list{margin-bottom:100px}.workout-detail-list p{margin:5px 0 0}.workout-detail-actions{gap:10px}.workout-detail-actions>.btn{flex:1;justify-content:center}
+.workout-detail-note{margin:0 0 12px;padding:15px 18px}.workout-detail-note h2{font-size:13px;margin:0 0 6px}.workout-detail-note p{font-size:12px;line-height:1.6;margin:0;color:var(--muted)}.workout-detail-source-note{border-color:var(--accent-soft)}
+@media(max-width:767px){.workout-card-main{grid-template-columns:minmax(0,1fr);gap:11px;padding:15px 51px 15px 15px;min-height:0}.workout-card-view{min-height:32px}.workout-detail-list{margin-bottom:110px}.workout-detail-summary{padding:14px 15px}}
