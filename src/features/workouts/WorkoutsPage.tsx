@@ -60,7 +60,7 @@ export default function WorkoutsPage() {
   }
 
   return <div className="page workouts-page">
-    <TopBar title="Fichas" eyebrow="Seus exercícios e últimas sessões"
+    <TopBar title="Treinos" eyebrow="Seus exercícios e últimas sessões"
       action={<Button variant="secondary" size="sm" onClick={() => navigate('/app/agenda')}><Plus size={16} />Minha agenda</Button>} />
 
     {cycles.length > 1 && <label className="workouts-cycle"><span className="eyebrow">CICLO</span>
@@ -69,13 +69,13 @@ export default function WorkoutsPage() {
       </select>
     </label>}
 
-    <Button variant="secondary" className="workouts-compose-button" onClick={() => setComposerOpen(true)}><Plus size={17} />Juntar duas fichas</Button>
+    <Button variant="secondary" className="workouts-compose-button" onClick={() => setComposerOpen(true)}><Plus size={17} />Juntar dois treinos</Button>
     {composerOpen && <WorkoutComposer onClose={() => setComposerOpen(false)} onSave={id => {
       toast.success('Treino combinado criado.');
       navigate(`/app/workouts/${id}`);
     }} />}
 
-    {!list.length ? <EmptyState icon={<Plus />} title="Nenhuma ficha disponível" description="Esta lista mostra só treinos com exercícios detalhados. Consulte as agendas para ver a divisão semanal." action={<Link className="btn btn-primary" to="/app/agenda">Abrir minha agenda</Link>} /> : <div className="workouts-list">
+    {!list.length ? <EmptyState icon={<Plus />} title="Nenhum treino disponível" description="Esta lista mostra só treinos com exercícios detalhados. Consulte as agendas para ver a divisão semanal." action={<Link className="btn btn-primary" to="/app/agenda">Abrir minha agenda</Link>} /> : <div className="workouts-list">
       {list.map((workout, index) => {
         const last = history.find(item => item.workoutId === workout.id);
         return <motion.article key={workout.id} className="workout-card card" initial={reducedMotion ? false : { opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: reducedMotion ? 0 : index * .04, duration: reducedMotion ? 0 : .22 }}>

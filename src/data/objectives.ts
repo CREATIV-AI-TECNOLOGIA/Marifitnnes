@@ -9,7 +9,7 @@ export interface Objective {
 }
 const specifications = [
  ['pro-hipertrofia','Hipertrofia','Desenvolvimento muscular com uma rotina na academia.','Academia'],
- ['agenda-gluteos','Glúteos','Uma divisão semanal com prioridade para glúteos.','Academia'],
+ ['agenda-gluteos','Glúteos','Prioridade para glúteos, com o treino C2 de outubro.','Academia'],
  ['agenda-quadriceps','Quadríceps','Ênfase em quadríceps, mantendo os outros grupos ativos.','Academia'],
  ['agenda-posterior','Posteriores','Foco na parte posterior dos membros inferiores.','Academia'],
  ['start-academia','Primeiros passos','Objetivo para quem está começando na academia.','Academia'],

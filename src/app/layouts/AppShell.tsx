@@ -9,7 +9,7 @@ import HelpSheet from '../../features/profile/HelpSheet';
 import { useIconMotion } from '../../components/ui/use-icon-motion';
 import './app-shell.css';
 export function Logo(){return <span className="logo"><span className="logo-mark"><i/><i/><i/></span>forma<span className="logo-dot">.</span></span>;}
-const links=[{to:'/app/home',label:'Objetivos',icon:House},{to:'/app/agenda',label:'Minha agenda',icon:CalendarDays},{to:'/app/workouts',label:'Fichas',icon:Dumbbell},{to:'/app/progress',label:'Evolução',icon:Activity},{to:'/app/history',label:'Histórico',icon:Layers2},{to:'/app/profile',label:'Perfil',icon:UserRound}];
+const links=[{to:'/app/home',label:'Objetivos',icon:House},{to:'/app/agenda',label:'Minha agenda',icon:CalendarDays},{to:'/app/workouts',label:'Treinos',icon:Dumbbell},{to:'/app/progress',label:'Evolução',icon:Activity},{to:'/app/history',label:'Histórico',icon:Layers2},{to:'/app/profile',label:'Perfil',icon:UserRound}];
 const dockMotion = [
   { y: [0, -3, 0], scale: [1, 1.12, 1] },
   { rotate: [0, -9, 6, 0], scale: [1, 1.08, 1, 1] },
@@ -66,8 +66,12 @@ function ThemeToggle() {
 }
 function PageContent({ children }: { children: ReactNode }) {
   const reduced = useReducedMotion();
-  useLayoutEffect(() => { window.scrollTo({ top: 0, left: 0, behavior: 'instant' }); }, []);
-  return <motion.div initial={reduced ? false : { opacity: 0, y: 7 }} animate={{ opacity: 1, y: 0 }}
+  const contentRef = useRef<HTMLDivElement>(null);
+  useLayoutEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    contentRef.current?.closest('.app-main')?.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, []);
+  return <motion.div ref={contentRef} className="app-page-content" initial={reduced ? false : { opacity: 0, y: 7 }} animate={{ opacity: 1, y: 0 }}
     transition={{ duration: reduced ? 0 : .38, ease: [.22, .68, .2, 1] }}>{children}</motion.div>;
 }
 
@@ -97,7 +101,7 @@ export default function AppShell() {
         </Link>
       </div>
     </aside>
-    <main className="app-main"><div className="desktop-topbar"><ThemeToggle />
+    <main className="app-main"><div className="desktop-topbar"><div id="app-topbar-back" /><ThemeToggle />
       <button type="button" className="app-help-link" aria-label="Ajuda" title="Ajuda" onClick={() => setHelpOpen(true)}><CircleHelp size={18} /></button>
     </div><PageContent key={location.pathname}><Outlet /></PageContent></main>
     <nav className="mobile-bottom-nav" aria-label="Navegação principal">

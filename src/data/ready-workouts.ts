@@ -1,10 +1,11 @@
 import type { Exercise, TrainingProgram, TrainingSession, Workout } from '../types';
 import { b2Exercises, c1Exercises, proB2, proC1 } from './pro-c1-b2';
 import { b3Exercises, proB3 } from './pro-b3';
+import { c2Exercises, proC2 } from './pro-c2-outubro';
 
 interface Library { workouts: Workout[]; exercises: Exercise[]; programs: TrainingProgram[]; activeSession: TrainingSession | null; }
-const ready = [proC1, proB2, proB3];
-const definitions = [...c1Exercises, ...b2Exercises, ...b3Exercises];
+const ready = [proC1, proB2, proB3, proC2];
+const definitions = [...c1Exercises, ...b2Exercises, ...b3Exercises, ...c2Exercises];
 
 /** Add the reviewed library without replacing personal prescriptions or active sessions. */
 export function addReadyWorkouts<T extends Library>(state: T): T {

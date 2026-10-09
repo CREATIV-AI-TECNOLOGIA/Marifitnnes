@@ -19,7 +19,7 @@ export default function HomePage(){
    const count=objectiveWorkouts(o,workouts).length;
    return <Link className="objective-card" key={o.id} to={`/app/objectives/${o.id}`} aria-label={`Explorar objetivo ${o.title}`}>
     <div className="objective-cover"><img src={cover.image} alt="" style={{objectPosition:cover.imagePosition}}/><span>{o.place}</span><Target size={20} aria-hidden="true"/></div>
-    <div className="objective-copy"><h2>{o.title}</h2><p>{o.description}</p><small>{o.suggestion?'Agenda sugerida disponível':'Agenda sugerida pendente'}{count?` · ${count} fichas`:''}</small><span className="objective-open">Explorar objetivo<ArrowRight size={16}/></span></div>
+    <div className="objective-copy"><h2>{o.title}</h2><p>{o.description}</p><small>{o.suggestion?'Agenda sugerida disponível':'Agenda sugerida pendente'}{count?` · ${count} treinos`:''}</small><span className="objective-open">Explorar objetivo<ArrowRight size={16}/></span></div>
    </Link>;
   })}</div>
   {!objectives.length&&<p role="status">Nenhum objetivo encontrado.</p>}

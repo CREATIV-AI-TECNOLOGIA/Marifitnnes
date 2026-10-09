@@ -1,4 +1,5 @@
-import { forwardRef, useId, useRef, type ButtonHTMLAttributes, type ReactNode } from 'react';
+import { forwardRef, useEffect, useId, useRef, useState, type ButtonHTMLAttributes, type ReactNode } from 'react';
+import { createPortal } from 'react-dom';
 import * as Dialog from '@radix-ui/react-dialog';
 import { cva } from 'class-variance-authority';
 import { ArrowLeft, ArrowUpRight, Inbox, X } from 'lucide-react';
@@ -46,7 +47,12 @@ export function SegmentedControl({ value, onChange, options, label = 'Selecionar
   </div>;
 }
 export function EmptyState({icon,title,description,action}:{icon?:ReactNode;title:string;description:string;action?:ReactNode}){return <div className="empty-state"><div className="empty-symbol">{icon||<Inbox size={28}/>}</div><h2>{title}</h2><p>{description}</p>{action}</div>;}
-export function TopBar({title,eyebrow,back,action}:{title:ReactNode;eyebrow?:string;back?:string;action?:ReactNode}){return <header className="page-header">{back&&<Link className="back-link" to={back}><ArrowLeft size={17}/> Voltar</Link>}<div className="row between"><div>{eyebrow&&<p className="eyebrow">{eyebrow}</p>}<h1>{title}</h1></div>{action}</div></header>;}
+export function TopBar({title,eyebrow,back,action}:{title:ReactNode;eyebrow?:string;back?:string;action?:ReactNode}){
+  const [backHost, setBackHost] = useState<HTMLElement | null>(null);
+  useEffect(() => { setBackHost(document.getElementById('app-topbar-back')); }, []);
+  const backLink = back && <Link className="back-link" to={back}><ArrowLeft size={17}/> Voltar</Link>;
+  return <header className="page-header">{backHost ? createPortal(backLink, backHost) : backLink}<div className="row between"><div>{eyebrow&&<p className="eyebrow">{eyebrow}</p>}<h1>{title}</h1></div>{action}</div></header>;
+}
 export function Badge({children,tone='neutral'}:{children:ReactNode;tone?:'accent'|'success'|'neutral'}){return <span className={`badge badge-${tone}`}>{children}</span>;}
 export function StickyActionBar({children}:{children:ReactNode}){return <div className="sticky-actions">{children}</div>;}
 export function Skeleton({className}:{className?:string}){return <div aria-hidden="true" className={cn('skeleton',className)}/>;}

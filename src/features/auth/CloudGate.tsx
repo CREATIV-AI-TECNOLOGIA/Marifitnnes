@@ -15,5 +15,5 @@ export default function CloudGate({children}:{children:ReactNode}){
     return()=>{active=false;};
   },[]);
   if(!ready)return <div className="page"><p role="status">Conectando sua conta…</p></div>;
-  return <>{error&&<p className="cloud-status" role="alert">{error}</p>}{cloudEnabled&&user&&<aside className="cloud-status" role="status"><span>{status}</span>{status!=='Tudo salvo na nuvem.'&&status!=='Salvando…'&&<><Button variant="ghost" onClick={()=>void flushCloud()}>Tentar salvar</Button><Button variant="ghost" onClick={()=>{if(window.confirm('Carregar a versão da nuvem? As alterações locais ainda não sincronizadas serão substituídas.'))void reloadCloud();}}>Carregar nuvem</Button></>}</aside>}{children}</>;
+  return <>{error&&<p className="cloud-status" role="alert">{error}</p>}{cloudEnabled&&user&&status!=='Tudo salvo na nuvem.'&&status!=='Salvando…'&&<aside className="cloud-status" role="status"><span>{status}</span>{status!=='Tudo salvo na nuvem.'&&status!=='Salvando…'&&<><Button variant="ghost" onClick={()=>void flushCloud()}>Tentar salvar</Button><Button variant="ghost" onClick={()=>{if(window.confirm('Carregar a versão da nuvem? As alterações locais ainda não sincronizadas serão substituídas.'))void reloadCloud();}}>Carregar nuvem</Button></>}</aside>}{children}</>;
 }

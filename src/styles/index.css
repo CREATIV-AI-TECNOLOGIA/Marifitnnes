@@ -82,3 +82,15 @@ html.theme-changing,html.theme-changing :where(body,.app-shell,.app-main,.deskto
 @keyframes bottom-panel-in{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
 @keyframes bottom-panel-out{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(22px)}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+@media(max-width:767px){
+ .app-shell .empty-state{padding:24px 16px}
+ .app-shell .empty-symbol{width:48px;height:48px;margin-bottom:12px;border-radius:16px}
+ .app-shell .empty-state h2{font-size:20px}
+ .app-shell .empty-state p{font-size:12px;margin:10px 0 16px}
+}
+
+.segmented-option{position:relative;flex:1;min-width:0;display:flex;align-items:center;justify-content:center;min-height:36px;padding:8px 9px;border-radius:8px;font-size:11px;color:var(--muted);cursor:pointer}
+.segmented-option>span:last-child{position:relative;z-index:1}
+.segmented-option:has(input:checked){color:var(--text);font-weight:650}
+.segmented-option:focus-within{outline:2px solid var(--accent);outline-offset:2px}
