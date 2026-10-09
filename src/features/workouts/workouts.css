@@ -1,4 +1,7 @@
-.workouts-cycle{margin-bottom:22px;display:flex;flex-direction:column;gap:9px;max-width:360px}
+.workout-combination-info{display:grid;gap:14px;margin-bottom:20px}
+.workout-combination-info h2{font-size:18px}
+.workout-combination-info p{line-height:1.6}
+.workout-combination-info>div{display:flex;gap:12px;flex-wrap:wrap}.workout-detail-plan-exercise li{grid-template-columns:minmax(0,1fr) auto;gap:3px 10px}.workout-detail-plan-exercise li>span:first-child{grid-column:1}.workout-detail-plan-exercise li>.workout-detail-plan-rest{grid-column:2;grid-row:1;text-align:right;white-space:nowrap}.workout-detail-plan-exercise li>strong{grid-column:1/-1;grid-row:2}.workout-detail-plan-exercise li>.workout-detail-plan-secondary{grid-column:1/-1;color:var(--muted);font-size:10px;line-height:1.35;overflow-wrap:anywhere}.workouts-cycle{margin-bottom:22px;display:flex;flex-direction:column;gap:9px;max-width:360px}
 .workouts-cycle-select{font-weight:550}
 .workouts-list{display:flex;flex-direction:column;gap:13px}
 .workout-card{position:relative;padding:0;overflow:hidden}
@@ -14,6 +17,11 @@
 .workouts-other-item:last-child{border-bottom:0}
 .workouts-other-item:hover{background:var(--bg)}
 .workouts-menu{display:flex;flex-direction:column;gap:10px}
+.workout-rename-form{display:grid;gap:12px;margin-bottom:18px}
+.workout-rename-form .field{display:grid;gap:7px}
+.workout-rename-form p{margin:0}
+.workout-rename-actions{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px}
+.workout-detail-title{min-width:0;overflow-wrap:anywhere}
 .workout-detail-hero{position:relative;padding:26px;border:0;color:#fff;background-size:cover;background-position:center;background-color:#232823;min-height:210px;display:flex;flex-direction:column;justify-content:flex-end;margin-bottom:18px}
 .workout-detail-hero .eyebrow{color:#ffbda8}
 .workout-detail-hero h2{font-size:36px;margin:7px 0 14px}
@@ -28,8 +36,27 @@
 .workout-card-main{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;padding:17px 56px 15px 18px;min-height:105px;align-items:center}
 .workout-card-copy strong{font-size:16px}.workout-card-copy p{margin:0}.workout-card-copy .row{justify-content:flex-start;gap:8px;flex-wrap:wrap}
 .workout-card-view{display:flex;align-items:center;gap:2px;color:var(--accent);font-size:11px;white-space:nowrap}
-.workout-detail-summary{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:0 0 25px;padding:16px 20px}
-.workout-detail-summary>div{display:flex;flex-direction:column;gap:5px}.workout-detail-summary strong{font-size:18px}.workout-detail-summary span{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
-.workout-detail-heading{margin:0 0 10px;gap:10px}.workout-detail-heading h2{margin:0}.workout-detail-list{margin-bottom:100px}.workout-detail-list p{margin:5px 0 0}.workout-detail-actions{gap:10px}.workout-detail-actions>.btn{flex:1;justify-content:center}
-.workout-detail-note{margin:0 0 12px;padding:15px 18px}.workout-detail-note h2{font-size:13px;margin:0 0 6px}.workout-detail-note p{font-size:12px;line-height:1.6;margin:0;color:var(--muted)}.workout-detail-source-note{border-color:var(--accent-soft)}
-@media(max-width:767px){.workout-card-main{grid-template-columns:minmax(0,1fr);gap:11px;padding:15px 51px 15px 15px;min-height:0}.workout-card-view{min-height:32px}.workout-detail-list{margin-bottom:110px}.workout-detail-summary{padding:14px 15px}}
+.workout-detail-title{display:inline-flex;align-items:center;gap:10px}.workout-detail-title-count{display:grid;place-items:center;min-width:29px;height:29px;padding:0 7px;border-radius:9px;background:var(--accent-soft);color:var(--accent);font-size:14px;font-weight:750;line-height:1}
+.workout-detail-actions{gap:10px}.workout-detail-actions>.btn{flex:1;justify-content:center}
+.workout-detail-guidance{margin:0 0 12px;padding:0;overflow:hidden}.workout-detail-guidance-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 18px;border:0;background:transparent;color:var(--text);font:inherit;text-align:left;cursor:pointer}.workout-detail-guidance-toggle>span{font-size:13px;font-weight:650}.workout-detail-guidance-toggle>svg{flex:none;color:var(--muted);transition:transform .24s ease}.workout-detail-guidance.is-open .workout-detail-guidance-toggle>svg{transform:rotate(180deg)}.workout-detail-guidance-content{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .28s cubic-bezier(.2,.8,.2,1),opacity .2s ease}.workout-detail-guidance.is-open .workout-detail-guidance-content{grid-template-rows:1fr;opacity:1}.workout-detail-guidance-inner{min-height:0;overflow:hidden;display:grid;gap:15px;padding:0 18px}.workout-detail-guidance.is-open .workout-detail-guidance-inner{padding-bottom:17px}.workout-detail-guidance-inner h2{font-size:13px;margin:0 0 6px}.workout-detail-guidance-inner p{font-size:12px;line-height:1.6;margin:0;color:var(--muted)}
+.workout-detail-plan{margin:0 0 110px;padding:0;overflow:hidden}.workout-detail-plan-toggle{width:100%;display:flex;align-items:center;gap:12px;padding:16px 18px;border:0;background:transparent;color:var(--text);font:inherit;text-align:left;cursor:pointer}.workout-detail-plan-toggle>span:first-child{font-size:13px;font-weight:650}.workout-detail-plan-toggle>svg{flex:none;margin-left:auto;color:var(--muted);transition:transform .24s ease}.workout-detail-plan.is-open .workout-detail-plan-toggle>svg{transform:rotate(180deg)}.workout-detail-plan-count{font-size:11px;color:var(--muted)}.workout-detail-plan-content{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .28s cubic-bezier(.2,.8,.2,1),opacity .2s ease}.workout-detail-plan.is-open .workout-detail-plan-content{grid-template-rows:1fr;opacity:1}.workout-detail-plan-inner{min-height:0;overflow:hidden;padding:0 16px}.workout-detail-plan.is-open .workout-detail-plan-inner{padding-bottom:16px}.workout-detail-plan-note{margin:0 0 12px;color:var(--muted);font-size:11px;line-height:1.5}.workout-detail-plan-exercise{padding:12px 0;border-top:1px solid var(--line)}.workout-detail-plan-exercise>header{display:grid;grid-template-columns:28px minmax(0,1fr) auto;align-items:center;gap:9px}.workout-detail-plan-index{display:grid;place-items:center;width:25px;height:25px;border-radius:8px;background:var(--elevated);color:var(--muted);font-size:10px}.workout-detail-plan-exercise>header>div{display:grid;gap:3px;min-width:0}.workout-detail-plan-exercise>header strong{font-size:12px;font-weight:600}.workout-detail-plan-exercise>header small{color:var(--muted);font-size:10px}.workout-detail-plan-exercise>header .badge{font-size:9px}.workout-detail-plan-exercise ol{display:grid;gap:5px;list-style:none;margin:9px 0 0 37px;padding:0}.workout-detail-plan-exercise li{display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:10px;padding:7px 9px;border-radius:8px;background:var(--bg);font-size:10px}.workout-detail-plan-exercise li>span:first-child,.workout-detail-plan-exercise li>span:last-child{color:var(--muted)}.workout-detail-plan-exercise li>strong{font-size:11px;font-weight:600}.workout-detail-plan-edit{display:inline-flex;align-items:center;gap:5px;margin-top:12px}
+@media(max-width:767px){.workout-card-main{grid-template-columns:minmax(0,1fr);gap:11px;padding:15px 51px 15px 15px;min-height:0}.workout-card-view{min-height:32px}.workout-detail-plan-exercise li{gap:7px;padding-inline:7px;font-size:9px}.workout-detail-plan-exercise>header{grid-template-columns:25px minmax(0,1fr) auto;gap:7px}}
+.workout-detail-plan-collapse{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;min-height:38px;margin-top:14px;border:0;border-top:1px solid var(--line);background:transparent;color:var(--muted);font-size:11px;font-weight:600}.workout-detail-plan-collapse svg{transform:rotate(180deg)}
+.workout-detail-switcher{margin:0 0 110px}
+.workout-detail-switcher-options{display:flex;gap:8px}
+.workout-detail-switcher-option{display:flex;align-items:center;justify-content:space-between;gap:8px;flex:1;min-width:0;min-height:55px;padding:11px 13px;border:1px solid var(--line);border-radius:13px;background:var(--surface);color:var(--text);text-align:left;font-size:12px;font-weight:650;transition:background .2s ease,border-color .2s ease}
+.workout-detail-switcher-option>span{min-width:0}.workout-detail-switcher-option small{display:block;margin-top:2px;color:var(--muted);font-size:10px;font-weight:400}.workout-detail-switcher-option svg{flex:none;color:var(--muted);transition:transform .25s ease}.workout-detail-switcher-option.is-active{background:var(--elevated);border-color:var(--line)}.workout-detail-switcher-option.is-active svg{transform:rotate(180deg)}
+.workout-detail-switcher-panel{display:grid;grid-template-rows:0fr;opacity:0;margin-top:0;padding:0;overflow:hidden;border-width:0;transition:grid-template-rows .28s cubic-bezier(.2,.8,.2,1),opacity .2s ease,margin-top .28s ease}
+.workout-detail-switcher-panel.is-open{grid-template-rows:1fr;opacity:1;margin-top:10px;border-width:1px}
+.workout-detail-switcher-inner{min-height:0;overflow:hidden}.workout-detail-switcher-panel.is-open .workout-detail-switcher-inner{padding:16px}
+.workout-detail-switcher .workout-detail-guidance-inner,.workout-detail-switcher .workout-detail-plan-inner{padding:0}
+@media(max-width:390px){.workout-detail-switcher-option{padding-inline:10px;font-size:11px}}
+.workout-card.card,.workout-detail-switcher-panel.card{padding:0}
+.workout-detail{display:flex;flex-direction:column;min-height:calc(100dvh - 73px)}
+.workout-detail-actions{margin-top:auto}
+@media(max-width:767px){.workout-detail{min-height:calc(100dvh - var(--nav-height) - env(safe-area-inset-bottom))}}
+
+.workout-detail-switcher-panel{transition:grid-template-rows var(--reveal-duration) var(--ease-refined),opacity 550ms ease,margin-top var(--reveal-duration) var(--ease-refined)}
+.workout-detail-switcher-inner{transition:padding var(--reveal-duration) var(--ease-refined)}
+.workout-detail-switcher-option svg{transition:transform var(--reveal-duration) var(--ease-refined)}
+.workout-detail-switcher-panel.is-open :is(.workout-detail-plan-inner,.workout-detail-guidance-inner){animation:fade-in 550ms ease both}

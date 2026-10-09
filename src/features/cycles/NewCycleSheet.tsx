@@ -11,7 +11,6 @@ const schema = z.object({
   name: z.string().trim().min(2, 'Use pelo menos 2 caracteres.').max(60, 'Use até 60 caracteres.'),
   weeks: z.number({ error: 'Informe a duração.' }).int('Use um número inteiro.').min(1, 'Mínimo de 1 semana.').max(52, 'Máximo de 52 semanas.'),
   frequency: z.number({ error: 'Informe a frequência.' }).int('Use um número inteiro.').min(2, 'Mínimo de 2 treinos.').max(7, 'Máximo de 7 treinos por semana.'),
-  next: z.enum(['import', 'empty']),
 });
 type Fields = z.infer<typeof schema>;
 
@@ -19,15 +18,9 @@ export default function NewCycleSheet({ open, onOpenChange }: { open: boolean; o
   const addCycle = useAppStore(s => s.addCycle);
   const navigate = useNavigate();
   const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm<Fields>({
-    resolver: zodResolver(schema), defaultValues: { name: '', weeks: 4, frequency: 3, next: 'empty' },
+    resolver: zodResolver(schema), defaultValues: { name: '', weeks: 4, frequency: 3 },
   });
   const submit = (values: Fields) => {
-    if (values.next === 'import') {
-      reset();
-      onOpenChange(false);
-      navigate('/app/workouts/import');
-      return;
-    }
     const start = new Date();
     const end = new Date(start);
     end.setDate(end.getDate() + values.weeks * 7 - 1);
@@ -46,10 +39,6 @@ export default function NewCycleSheet({ open, onOpenChange }: { open: boolean; o
         {errors.weeks && <span id="cycle-weeks-error" className="cycles-error" role="alert">{errors.weeks.message}</span>}</label>
         <label className="field" htmlFor="cycle-frequency">Treinos por semana<input id="cycle-frequency" className="input" type="number" inputMode="numeric" min={2} max={7} {...register('frequency', { valueAsNumber: true })} aria-invalid={!!errors.frequency} aria-describedby={errors.frequency ? 'cycle-frequency-error' : undefined} />
           {errors.frequency && <span id="cycle-frequency-error" className="cycles-error" role="alert">{errors.frequency.message}</span>}</label></div>
-      <fieldset className="cycles-next"><legend>Como quer começar?</legend>
-        <label><input type="radio" value="empty" {...register('next')} /><span><strong>Começar vazio</strong><small>Adicione os treinos depois.</small></span></label>
-        <label><input type="radio" value="import" {...register('next')} /><span><strong>Importar uma agenda</strong><small>Escolher um PDF e configurar a frequência semanal.</small></span></label>
-      </fieldset>
       <p className="muted small">Começa hoje e se torna seu ciclo atual. Nenhum treino, histórico ou sessão em andamento será excluído.</p>
       <Button type="submit" disabled={isSubmitting}>{isSubmitting ? 'Criando…' : 'Criar ciclo'}</Button>
     </form>

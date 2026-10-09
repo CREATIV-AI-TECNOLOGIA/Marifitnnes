@@ -13,7 +13,7 @@ interface WeightSheetProps {
 export default function WeightSheet({ set, unit, onClose, onChange }: WeightSheetProps) {
   const weight = toDisplayWeight(set?.weight ?? 0, unit);
   return (
-    <Sheet open={!!set} onOpenChange={open => { if (!open) onClose(); }} title={`Carga da série ${set?.setNumber ?? ''}`} description={`Ajustes em ${unit}, salvos automaticamente nesta série.`}>
+    <Sheet open={!!set} onOpenChange={open => { if (!open) onClose(); }} title={`Carga da série ${set?.setNumber ?? ''}`} description={`Ajustes em ${unit}, salvos automaticamente nesta série.`} className="session-sheet">
       {set && <div className="stack session-weight-sheet">
         <label className="field" htmlFor="session-sheet-weight">Carga ({unit})
           <NumberInput key={`${set.setNumber}-${unit}`} id="session-sheet-weight" value={weight} step={0.1} onValueChange={value => onChange(toKg(value, unit))} />

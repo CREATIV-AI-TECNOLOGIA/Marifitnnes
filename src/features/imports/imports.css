@@ -1,4 +1,27 @@
-.import-dropzone{border:1.5px dashed var(--line);border-radius:20px;background:var(--surface);padding:38px 24px;text-align:center;transition:border-color .2s,background .2s;margin-bottom:12px}
+.source-exercise-list{list-style:none;margin:16px 0;padding:8px 18px}
+.source-exercise-list li{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.source-exercise-list li:last-child{border-bottom:0}
+.source-exercise-list small{color:var(--muted);white-space:nowrap}.source-warnings{display:grid;gap:12px;margin-bottom:18px;border-color:color-mix(in srgb,var(--text) 35%,var(--line))}
+.source-warnings h2{font-size:17px}
+.source-warnings p,.source-warnings li{font-size:13px;line-height:1.65}
+.source-warnings p{color:var(--muted)}
+.source-warnings ul{margin:0;padding-left:20px;display:grid;gap:10px}.import-dropzone{border:1.5px dashed var(--line);border-radius:20px;background:var(--surface);padding:38px 24px;text-align:center;transition:border-color .2s,background .2s;margin-bottom:12px}
+.source-heading{padding:18px;margin-bottom:16px;display:grid;gap:10px}
+.source-heading h2{font-size:18px;overflow-wrap:anywhere}
+.source-heading p,.source-page p{line-height:1.6}
+.source-preview{display:grid;gap:12px;margin-bottom:22px}
+.source-page{padding:16px;min-width:0}
+.source-page summary{cursor:pointer;display:flex;gap:12px;align-items:center;justify-content:space-between;font-weight:600;list-style:revert;min-height:30px}
+.source-page summary span{font-size:12px;color:var(--muted);white-space:nowrap}
+
+.source-page ol{padding-left:20px;font-size:14px;line-height:1.8;margin:12px 0}
+.source-page p{font-size:14px;margin-top:12px}
+
+.source-table{overflow-x:auto;margin-top:12px}
+.source-table table{border-collapse:collapse;font-size:12px;min-width:560px;width:100%}
+.source-table th,.source-table td{padding:8px;border:1px solid var(--line);text-align:left}
+.import-progress{margin-bottom:18px;font-size:14px}
+.import-progress progress{width:100%;accent-color:var(--accent);margin-top:8px}
 .import-dropzone.is-dragging{border-color:var(--accent);background:var(--accent-soft)}
 .import-dropzone.has-file{padding:20px}
 .import-empty{display:flex;flex-direction:column;align-items:center;gap:12px}
@@ -13,6 +36,25 @@
 .import-error{margin:2px 0 10px}
 .import-note{display:flex;align-items:center;gap:8px;color:var(--muted);margin-bottom:20px;line-height:1.5}
 .import-cta{margin-bottom:10px}
+.source-heading,.source-warnings{padding:18px;margin-bottom:16px;display:grid;gap:10px}
+.source-heading h2,.source-warnings h2{font-size:18px;overflow-wrap:anywhere}
+.source-heading p,.source-warnings p,.source-page p{line-height:1.6}
+.source-warnings{border-color:var(--muted)}
+.source-accept{display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.5}
+.source-accept input{margin-top:4px;min-width:18px;min-height:18px;accent-color:var(--accent)}
+.source-pages,.source-preview{display:grid;gap:12px;margin-bottom:22px}
+.source-page{padding:16px;min-width:0}
+.source-page summary{cursor:pointer;display:flex;gap:12px;align-items:center;justify-content:space-between;font-weight:600;list-style:revert;min-height:30px}
+.source-page summary span{font-size:12px;color:var(--muted);white-space:nowrap}
+.source-page pre{font:inherit;font-size:13px;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.7;margin:16px 0}
+.source-page ol{padding-left:20px;font-size:14px;line-height:1.8;margin:12px 0}
+.source-page p{font-size:14px;margin-top:12px}
+.source-links{display:flex;flex-wrap:wrap;gap:14px;margin-top:16px}
+.source-table{overflow-x:auto;margin-top:12px}
+.source-table table{border-collapse:collapse;font-size:12px;min-width:560px;width:100%}
+.source-table th,.source-table td{padding:8px;border:1px solid var(--line);text-align:left}
+.import-progress{margin-bottom:18px;font-size:14px}
+.import-progress progress{width:100%;accent-color:var(--accent);margin-top:8px}
 .import-example{display:block;margin:0 auto;border:0;background:none}
 .import-steps{display:flex;flex-direction:column;gap:4px;padding:8px 0 16px}
 .import-step{display:flex;align-items:center;gap:14px;min-height:52px;color:var(--muted);font-size:14px;position:relative}

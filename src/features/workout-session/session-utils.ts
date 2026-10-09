@@ -3,6 +3,10 @@ import { toDisplayWeight } from '../../utils/format';
 
 export type PreviousSet = Partial<Pick<SessionSet, 'weight' | 'performedReps'>>;
 
+export function suggestedRestSeconds(definition: Pick<Exercise, 'rest' | 'restBySet'> | undefined, setIndex = 0) {
+  return Math.max(0, Math.min(3600, Math.round(definition?.restBySet?.[setIndex] ?? definition?.rest ?? 60)));
+}
+
 export function isExerciseComplete(exercise: SessionExercise) {
   return exercise.sets.length > 0 && exercise.sets.every(set => set.completed);
 }
@@ -35,7 +39,9 @@ export function summarizeSession(session: TrainingSession) {
     totalExercises: session.exercises.length,
     completedSets: completed.length,
     totalSets: sets.length,
-    reps: completed.reduce((sum, set) => sum + set.performedReps, 0),
+    reps: session.exercises.filter(exercise => !exercise.measurementLabel).reduce((sum, exercise) => sum + exercise.sets
+      .filter(set => set.completed)
+      .reduce((setTotal, set) => setTotal + set.performedReps + (set.secondaryPerformedReps ?? 0), 0), 0),
     volume: completed.reduce((sum, set) => sum + set.weight * set.performedReps, 0),
   };
 }

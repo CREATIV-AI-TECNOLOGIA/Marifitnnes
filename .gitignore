@@ -6,11 +6,15 @@ coverage/
 .vite/
 .env*
 !.env.example
+!.env.cloud
 **/graphify-out/
 
 # Local workspace data
 /MEMORY.md
 /outputs/
+/tmp/
+.wrangler/
+.dev.vars*
 /uploads/
 
 # Unrelated Rastro and biolink projects in this workspace

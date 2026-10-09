@@ -35,9 +35,9 @@ export default function ExerciseProgressPage() {
     {record && <section className="progress-record"><Trophy size={24} aria-hidden="true" /><div><h2>Maior carga registrada · todo o histórico</h2>
       <strong>{number(toDisplayWeight(record.set.weight, unit))} {unit}</strong>
       <p>{record.set.performedReps} repetições · {dateLabel(record.session.startedAt, { day: 'numeric', month: 'short', year: 'numeric' })}</p></div></section>}
-    <div className="progress-period"><SegmentedControl value={period} onChange={v => { setPeriod(v as Period); setLimit(3); }} options={periodOptions} /></div>
+    <div className="progress-period"><SegmentedControl label="Período da evolução" value={period} onChange={v => { setPeriod(v as Period); setLimit(3); }} options={periodOptions} /></div>
     {!all.length ? <EmptyState icon={<Trophy />} title="Seu próximo recorde começa aqui" description="Conclua séries deste exercício para acompanhar sua carga, volume e tempo." action={<Link className="text-link" to="/app/workouts">Ir aos treinos</Link>} /> : <>
-      <section className="progress-panel"><SegmentedControl value={metric} onChange={setMetric} options={[{ value: 'load', label: 'Carga' }, { value: 'volume', label: 'Volume' }, { value: 'time', label: 'Tempo' }]} />
+      <section className="progress-panel"><SegmentedControl label="Indicador do exercício" value={metric} onChange={setMetric} options={[{ value: 'load', label: 'Carga' }, { value: 'volume', label: 'Volume' }, { value: 'time', label: 'Tempo' }]} />
         <ProgressChart label={label} unit={chartUnit} points={days.map(d => ({ date: d.date,
           value: metric === 'time' ? d.seconds / 60 : metric === 'volume' ? toDisplayWeight(d.volume, unit) : d.load === null ? null : toDisplayWeight(d.load, unit),
         }))} />

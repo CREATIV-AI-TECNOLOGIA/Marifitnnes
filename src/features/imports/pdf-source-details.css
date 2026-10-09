@@ -1,0 +1,7 @@
+.pdf-source-details{margin:16px 0;min-width:0}
+.pdf-source-details summary{cursor:pointer;font-weight:600;line-height:1.5;padding:8px 0}
+.pdf-source-details>summary span{display:block;font-size:12px;font-weight:400;color:var(--muted)}
+.pdf-source-page{border-top:1px solid var(--line);margin-top:12px}
+.pdf-source-text{white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px;line-height:1.7;margin:12px 0}
+.pdf-source-page>a{display:block;overflow-wrap:anywhere;margin:8px 0}
+.pdf-mobility-guide{margin:12px 0}

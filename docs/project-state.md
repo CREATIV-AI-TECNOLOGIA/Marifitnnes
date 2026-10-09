@@ -1,5 +1,18 @@
 # Estado do projeto
 
+## Atualização de 09/10/2026 — recuperação e objetivos
+
+O checkout foi clonado de CREATIV-AI-TECNOLOGIA/Marifitnnes para a pasta de projetos. O remoto continha apenas o commit inicial; o restante foi recuperado dos registros locais e do Worker publicado. A recuperação foi validada, mas não há comparação integral com a pasta apagada.
+
+- O catálogo apresenta dez objetivos. Dentro de cada objetivo, a pessoa aceita a agenda sugerida ou cria sua divisão semanal. Minha agenda reúne os dias dos objetivos e preserva a agenda anteriormente ativa.
+- O dock mostra Minha agenda centralizado em uma linha em 320, 375 e 414 px.
+- Ainda faltam agendas específicas confirmadas para Posteriores, Primeiros passos, Emagrecimento em casa, Membros inferiores e Membros superiores. As divergências dos PDFs ficam sinalizadas; prescrições ausentes não foram inventadas.
+- A revisão da recuperação identificou a ausência do acesso a renomear fichas. O botão foi restaurado na ficha e no menu da lista, usando o formulário e a persistência existentes.
+- Validação: 103 testes de aplicação/Worker; build cloud; check cloud; agendas sugeridas/personalizadas, persistência e substituição no navegador; renomeação pela ficha e pela lista com recarga; arquivos de produção conferidos. Não foram executadas migrações ou exclusões de dados de usuários.
+
+Os registros abaixo descrevem etapas anteriores e não representam o estado atual completo.
+
+
 ## FORMA-PDF-20260928 — Agenda Pro e treino A1 pré-carregados
 
 Atualizado em: 2026-09-28 19:14 (America/Sao_Paulo)

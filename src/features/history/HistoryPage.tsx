@@ -13,7 +13,7 @@ function SessionRow({ session }: { session: TrainingSession }) {
     <div className="history-day-stamp"><strong>{new Date(session.startedAt).getDate()}</strong>
       <span>{dateLabel(session.startedAt, { weekday: 'short' }).replace('.', '')}</span></div>
     <div className="history-session-copy"><strong>{session.workoutName}</strong>
-      <p>{duration(session.elapsedTime)} · {sessionSetCount(session)} séries · {new Date(session.startedAt).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}</p></div>
+      <p>{duration(session.elapsedTime)} · {sessionSetCount(session)} {sessionSetCount(session) === 1 ? 'série' : 'séries'} · {new Date(session.startedAt).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}</p></div>
     <ChevronRight size={16} aria-hidden="true" />
   </Link>;
 }
@@ -57,7 +57,7 @@ export default function HistoryPage() {
         <select id="history-workout" className="input" value={workout} onChange={e => { setWorkout(e.target.value); setLimit(6); setSelectedDay(null); }}>
           <option value="all">Todos os treinos</option>{workouts.map(([id, name]) => <option key={id} value={id}>{name}</option>)}
         </select>
-        <SegmentedControl value={view} onChange={setView} options={[{ value: 'list', label: 'Lista' }, { value: 'calendar', label: 'Calendário' }]} />
+        <SegmentedControl label="Visualização do histórico" value={view} onChange={setView} options={[{ value: 'list', label: 'Lista' }, { value: 'calendar', label: 'Calendário' }]} />
       </div>
       {view === 'list' ? <>
         {!filtered.length && <EmptyState title="Nenhuma sessão" description="Escolha outro treino para consultar seu histórico." />}
@@ -83,7 +83,7 @@ export default function HistoryPage() {
                 onClick={() => setSelectedDay(key)}>{i + 1}</button>;
             })}
           </div>
-          <p className="history-calendar-key">{performedDays.size} dias com treino · Toque em um dia marcado.</p>
+          <p className="history-calendar-key">{performedDays.size} {performedDays.size === 1 ? 'dia' : 'dias'} com treino · Toque em um dia marcado.</p>
         </section>
         {activeDay ? <section aria-live="polite"><h2 className="history-month">{dateLabel(+localDate(activeDay))}</h2>
           <div className="history-list">{monthSessions.filter(s => dateKey(s.startedAt) === activeDay).map(s => <SessionRow key={s.id} session={s} />)}</div>

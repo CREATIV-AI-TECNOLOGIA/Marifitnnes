@@ -1,6 +1,7 @@
 import type { AgendaWeek, ImportDraft, ProgramFrequency } from '../types';
 
 const REST = 'Descanso';
+export const SHEFLOW_REST = 'Descanso / SheFlow';
 const CODE = /^[A-D]\d?$/;
 const DAYS = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'];
 
@@ -26,20 +27,23 @@ function frequencyFrom(lines: string[]) {
 function scheduleCells(line: string) {
   const body = plain(line)
     .replace(/^\s*(?:SEMANA|SEM)\s*0?\d{1,2}(?:\s*(?:A|ATE)\s*\d{1,2})?\s*/i, '')
-    .replace(/^\s*EXERCICIO\s*/i, '')
-    .replace(/\/\s*SHE\s*FLOW\b/gi, ' ');
+    .replace(/^\s*EXERCICIO\s*/i, '');
   const tokens = body.match(/\b(?:[A-D]\d?|DESCANSO|ESCOLHER|OU|SHEFLOW)\b/gi) ?? [];
   const cells: string[] = [];
 
   for (let index = 0; index < tokens.length; index++) {
     const token = tokens[index].toUpperCase();
-    if (token === 'SHEFLOW' || token === 'OU') continue;
+    if (token === 'OU') continue;
     if (CODE.test(token)) {
       if (tokens[index + 1]?.toUpperCase() === 'OU' && CODE.test(tokens[index + 2]?.toUpperCase() ?? '')) {
         cells.push(`${token}/${tokens[index + 2].toUpperCase()}`);
         index += 2;
       } else cells.push(token);
-    } else if (token === 'DESCANSO') cells.push(REST);
+    } else if (token === 'DESCANSO') {
+      const sheFlowRest = tokens[index + 1]?.toUpperCase() === 'SHEFLOW';
+      cells.push(sheFlowRest ? SHEFLOW_REST : REST);
+      if (sheFlowRest) index++;
+    } else if (token === 'SHEFLOW') continue;
     else if (token === 'ESCOLHER') cells.push('Escolher treino');
   }
   return cells;

@@ -1,0 +1,95 @@
+.app-shell svg.lucide{transform-box:fill-box;transform-origin:center}
+
+.app-shell .mobile-bottom-nav{display:none}
+
+
+
+@media(max-width:767px){
+
+  :root{--nav-height:100px}
+
+  .app-shell .mobile-bottom-nav{
+
+    display:grid;grid-template-columns:repeat(6,minmax(0,1fr));
+
+    position:fixed;inset:auto 12px calc(12px + env(safe-area-inset-bottom));
+
+    max-width:520px;margin-inline:auto;height:76px;padding:6px;gap:2px;
+
+    border:1px solid color-mix(in srgb,var(--text) 14%,var(--surface));border-radius:25px;
+
+    background:color-mix(in srgb,var(--surface) 94%,transparent);
+
+    backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+
+    box-shadow:0 8px 30px #00000012,0 2px 6px #00000008;isolation:isolate;
+
+  }
+
+  .dark .mobile-bottom-nav{box-shadow:0 8px 32px #0008,inset 0 1px 0 #ffffff08}
+
+  .app-shell .mobile-bottom-nav a{
+
+    position:relative;display:flex;align-items:center;justify-content:center;flex-direction:column;
+
+    min-width:0;min-height:62px;gap:6px;padding:7px 0;border-radius:18px;
+
+    font-size:10px;font-weight:550;color:var(--muted);outline-offset:3px;
+
+    transition:color 320ms var(--ease-refined),transform 240ms var(--ease-refined);
+
+  }
+
+  .app-shell .mobile-bottom-nav a.active{color:var(--text);font-weight:700}
+
+  .app-shell .mobile-bottom-nav a::before,.app-shell .mobile-bottom-nav a::after{content:none}
+
+  .app-shell .mobile-bottom-nav a:active{transform:scale(.95)}
+
+  .app-shell .mobile-bottom-nav a:focus-visible{outline:2px solid var(--text);box-shadow:none}
+
+  .dock-selection{position:absolute;top:7px;left:calc(50% - 16px);width:32px;height:32px;border-radius:11px;background:var(--accent);z-index:0}
+
+  .dock-icon{position:relative;display:grid;place-items:center;width:32px;height:32px;z-index:1}
+
+  .dock-label{position:relative;z-index:1;line-height:1.2;letter-spacing:-.02em}
+
+  .app-shell .mobile-bottom-nav svg{width:22px;height:22px;padding:0;stroke-width:1.8;background:none}
+
+  .app-shell .mobile-bottom-nav a.active svg{color:var(--on-accent);stroke-width:1.9}
+
+}
+
+@media(max-width:360px){
+
+  .app-shell .mobile-bottom-nav{inset-inline:8px;padding:5px;gap:1px;border-radius:23px}
+
+  .app-shell .mobile-bottom-nav a{font-size:9px}
+
+}
+
+@media(prefers-reduced-motion:reduce){.app-shell .mobile-bottom-nav a:active{transform:none}}
+
+
+/* Manter os seis itens e centralizar Minha agenda em uma linha. */
+@media (max-width: 767px) {
+  .app-shell .mobile-bottom-nav a {
+    flex: 1 1 0;
+    min-width: 0;
+    text-align: center;
+  }
+  .app-shell .mobile-bottom-nav a[href="#/app/agenda"] {
+    flex: 1.4 1 0;
+    min-width: 64px;
+  }
+  .app-shell .mobile-bottom-nav .dock-label {
+    display: block;
+    align-self: center;
+    width: max-content;
+    max-width: 100%;
+    white-space: nowrap;
+    text-align: center;
+    font-size: 9px;
+    line-height: 1.2;
+  }
+}

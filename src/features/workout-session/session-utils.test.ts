@@ -1,7 +1,14 @@
 import { describe, expect, it } from 'vitest';
 import type { Exercise, SessionExercise, SessionSet, TrainingSession } from '../../types';
 import { toDisplayWeight, toKg } from '../../utils/format';
-import { exerciseStatus, getLoadRecords, getPreviousSets, isExerciseComplete, summarizeSession } from './session-utils';
+import { exerciseStatus, getLoadRecords, getPreviousSets, isExerciseComplete, summarizeSession, suggestedRestSeconds } from './session-utils';
+
+it('não inventa descanso onde a ficha informa zero e respeita o descanso por série', () => {
+  expect(suggestedRestSeconds({ rest: 0 })).toBe(0);
+  expect(suggestedRestSeconds({ rest: 90, restBySet: [0, 120] }, 0)).toBe(0);
+  expect(suggestedRestSeconds({ rest: 90, restBySet: [0, 120] }, 1)).toBe(120);
+  expect(suggestedRestSeconds(undefined)).toBe(60);
+});
 
 const set = (patch: Partial<SessionSet> = {}): SessionSet => ({
   setNumber: 1, targetReps: '10', performedReps: 10, weight: 20, completed: true, ...patch,

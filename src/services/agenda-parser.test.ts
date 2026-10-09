@@ -87,7 +87,10 @@ describe('parseTrainingAgenda', () => {
     expect(program.name).toBe('Hipertrofia na academia');
     expect(program.frequencies.map(item => item.frequency)).toEqual([3, 4, 5, 6]);
     expect(program.frequencies.every(item => item.weeks.length === 6)).toBe(true);
-    expect(program.frequencies.find(item => item.frequency === 6)?.weeks[0].days).toEqual(['A1', 'B2', 'C1', 'B3', 'A2', 'C2', 'Descanso']);
+    expect(program.frequencies.find(item => item.frequency === 6)?.weeks[0].days).toEqual(['A1', 'B2', 'C1', 'B3', 'A2', 'C2', 'Descanso / SheFlow']);
+    expect(program.frequencies.find(item => item.frequency === 5)?.weeks[0].days).toEqual(['A1', 'B2', 'C1', 'B3', 'A2', 'Descanso', 'Descanso / SheFlow']);
+    expect(program.frequencies.find(item => item.frequency === 4)?.weeks[0].days).toEqual(['A1', 'B2', 'Descanso', 'C1', 'B3', 'Descanso / SheFlow', 'Descanso']);
+    expect(program.frequencies.find(item => item.frequency === 3)?.weeks[0].days).toEqual(['A2', 'Descanso', 'B1', 'Descanso / SheFlow', 'C2', 'Descanso', 'Descanso / SheFlow']);
     expect(program.workoutCodes).toEqual(['A1', 'A2', 'B1', 'B2', 'B3', 'C1', 'C2']);
   });
 

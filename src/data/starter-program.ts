@@ -1,6 +1,8 @@
 import type { Exercise, ProgramFrequency, TrainingProgram } from '../types';
+import { SHEFLOW_REST } from '../services/agenda-parser';
 
 const rest = 'Descanso';
+const sheFlowRest = SHEFLOW_REST;
 const weeks = (rows: string[][]): ProgramFrequency['weeks'] => rows.map((days, index) => ({ week: index + 1, days }));
 
 function exercise(
@@ -53,13 +55,13 @@ const a1: Exercise[] = [
   ),
   exercise(
     'cadeira-extensora', 'Cadeira extensora', 'Treino principal',
-    ['12', '10', '8', '5 pesadas + 10 leves'], [60, 60, 60, 60], 'Suba em 2 s e desça em 3 s.',
+    ['12', '10', '8', '5 pesadas + pausa de 10 s + 10 leves'], [60, 60, 60, 60], 'Suba em 2 s e desça em 3 s.',
     'São 4 séries. Na última, faça 5 repetições pesadas, pause 10 s e faça mais 10 repetições leves. Registre 15 no campo de repetições da última série. Evite trancos e controle toda a volta do movimento. Descanso indicado: 1–3 min.',
   ),
   exercise(
     'mesa-flexora', 'Mesa flexora', 'Treino principal',
-    ['10–12', '10–12', '10–12', '10–12'], [60, 60, 60, 60], 'Suba em 2 s e desça em 3 s.',
-    'Evite trancos e controle toda a volta do movimento. Descanso indicado: 1–3 min.',
+    ['10–12', '10–12', '10–12', 'Não informada no PDF'], [60, 60, 60, 60], 'Suba em 2 s e desça em 3 s.',
+    'A ficha indica 4 séries, mas só detalha as repetições das 3 primeiras. Confirme a quarta com a responsável. Evite trancos e controle toda a volta do movimento. Descanso indicado: 1–3 min.',
   ),
   exercise(
     'panturrilha-leg-press', 'Panturrilha no leg press', 'Treino principal',
@@ -68,54 +70,59 @@ const a1: Exercise[] = [
   ),
 ];
 
+const restLabels = ['30 s', '30–45 s', '', '60–90 s', '60–90 s', '1–3 min', '1–3 min', '1–3 min', 'até 90 s'];
+a1.forEach((item, index) => {
+  item.restLabel = restLabels[index] || undefined;
+  item.sourcePage = [6, 6, 7, 7, 8, 8, 9, 9, 10][index];
+});
+a1[1].restBySet = [30, 30];
+a1[2].restLabelsBySet = ['60 s', '60–80 s', '80–100 s'];
+a1[5].setCountRange = { min: 2, max: 3 };
+a1[0].measurementLabel = 'Passos';
+
 const starterProgram: TrainingProgram = {
   id: 'she-pro-hipertrofia-academia',
   name: 'Hipertrofia na academia',
   focus: 'Hipertrofia na academia',
   description: 'Agenda Pro de academia com frequências de 3 a 6 dias por semana. A ficha A1 de inferiores já está cadastrada.',
   sourceFile: 'ebook_cb91cd01-f751-4c92-88bf-3a75a864f769.pdf',
+  sourceId: 'she-pro-agenda',
   cycleWeeks: 6,
   workoutCodes: ['A1', 'A2', 'B1', 'B2', 'B3', 'C1', 'C2'],
   workoutLabels: { A1: 'Inferiores completo', A2: 'Treino A2', B1: 'Treino B1', B2: 'Treino B2', B3: 'Treino B3', C1: 'Treino C1', C2: 'Treino C2' },
-  workoutPreparation: {
-    A1: 'Mobilidade ativa de quadril, joelho e tornozelo por 3–5 minutos, com amplitude progressiva e controle do movimento.',
-  },
-  workoutNotes: {
-    A1: 'A agenda geral organiza 6 semanas. A ficha A1 descreve progressão de 5 semanas: semanas 1–2 adaptação e técnica; 3–4 progressão de carga; semana 5 maior proximidade da falha técnica. A ficha não informa como conduzir a semana 6.',
-  },
   exerciseTemplates: { A1: a1 },
   frequencies: [
     { frequency: 3, weeks: weeks([
-      ['A2', rest, 'B1', rest, 'C2', rest, rest],
-      ['C1', rest, 'B1', rest, 'A1', rest, rest],
-      ['A1', rest, 'B1', rest, 'C2', rest, rest],
-      ['C2', rest, 'B1', rest, 'A2', rest, rest],
-      ['A2', rest, 'B1', rest, 'C1', rest, rest],
-      ['A1', rest, 'B1', rest, 'C2', rest, rest],
+      ['A2', rest, 'B1', sheFlowRest, 'C2', rest, sheFlowRest],
+      ['C1', rest, 'B1', sheFlowRest, 'A1', rest, sheFlowRest],
+      ['A1', rest, 'B1', sheFlowRest, 'C2', rest, sheFlowRest],
+      ['C2', rest, 'B1', sheFlowRest, 'A2', rest, sheFlowRest],
+      ['A2', rest, 'B1', sheFlowRest, 'C1', rest, sheFlowRest],
+      ['A1', rest, 'B1', sheFlowRest, 'C2', rest, sheFlowRest],
     ]) },
     { frequency: 4, weeks: weeks([
-      ['A1', 'B2', rest, 'C1', 'B3', rest, rest],
-      ['A2', 'B1', rest, 'C2', 'B2', rest, rest],
-      ['C1', 'B3', rest, 'A1', 'B1', rest, rest],
-      ['A2', 'B2', rest, 'C2', 'B3', rest, rest],
-      ['A1', 'B1', rest, 'C1', 'B2', rest, rest],
-      ['A2', 'B1', rest, 'C2', 'B3', rest, rest],
+      ['A1', 'B2', rest, 'C1', 'B3', sheFlowRest, rest],
+      ['A2', 'B1', rest, 'C2', 'B2', sheFlowRest, rest],
+      ['C1', 'B3', rest, 'A1', 'B1', sheFlowRest, rest],
+      ['A2', 'B2', rest, 'C2', 'B3', sheFlowRest, rest],
+      ['A1', 'B1', rest, 'C1', 'B2', sheFlowRest, rest],
+      ['A2', 'B1', rest, 'C2', 'B3', sheFlowRest, rest],
     ]) },
     { frequency: 5, weeks: weeks([
-      ['A1', 'B2', 'C1', 'B3', 'A2', rest, rest],
-      ['A2', 'B1', 'C2', 'B2', 'A1', rest, rest],
-      ['C1', 'B3', 'A1', 'B1', 'C2', rest, rest],
-      ['A1', 'B2', 'C2', 'B3', 'A2', rest, rest],
-      ['A2', 'B1', 'C1', 'B2', 'C2', rest, rest],
-      ['A1', 'B1', 'C1', 'B3', 'A2', rest, rest],
+      ['A1', 'B2', 'C1', 'B3', 'A2', rest, sheFlowRest],
+      ['A2', 'B1', 'C2', 'B2', 'A1', rest, sheFlowRest],
+      ['C1', 'B3', 'A1', 'B1', 'C2', rest, sheFlowRest],
+      ['A1', 'B2', 'C2', 'B3', 'A2', rest, sheFlowRest],
+      ['A2', 'B1', 'C1', 'B2', 'C2', rest, sheFlowRest],
+      ['A1', 'B1', 'C1', 'B3', 'A2', rest, sheFlowRest],
     ]) },
     { frequency: 6, weeks: weeks([
-      ['A1', 'B2', 'C1', 'B3', 'A2', 'C2', rest],
-      ['A2', 'B1', 'C2', 'B2', 'A1', 'C2', rest],
-      ['C1', 'B3', 'A1', 'B1', 'C2', 'A2', rest],
-      ['A1', 'B2', 'C2', 'B3', 'A2', 'B1', rest],
-      ['A2', 'B3', 'C1', 'B2', 'A1', 'C2', rest],
-      ['A1', 'B1', 'C1', 'B2', 'A2', 'C2', rest],
+      ['A1', 'B2', 'C1', 'B3', 'A2', 'C2', sheFlowRest],
+      ['A2', 'B1', 'C1', 'B2', 'A1', 'C2', sheFlowRest],
+      ['C1', 'B3', 'A1', 'B1', 'C2', 'A2', sheFlowRest],
+      ['A1', 'B2', 'C2', 'B3', 'A2', 'B1', sheFlowRest],
+      ['A2', 'B3', 'C1', 'B2', 'A1', 'C2', sheFlowRest],
+      ['A1', 'B1', 'C1', 'B2', 'A2', 'C2', sheFlowRest],
     ]) },
   ],
 };

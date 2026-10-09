@@ -33,7 +33,7 @@ export default function RestTimer({ timer, open, onOpenChange, autoRest, onAutoR
         </button>
         <IconButton label="Encerrar descanso" onClick={timer.stop}><X size={16} /></IconButton>
       </div>}
-      <Sheet open={open} onOpenChange={onOpenChange} title="Seu intervalo" description="Respire. O próximo movimento pode esperar.">
+      <Sheet open={open} onOpenChange={onOpenChange} title="Seu intervalo" description="Respire. O próximo movimento pode esperar." className="session-sheet">
         <div className="stack session-rest-sheet">
           {timer.active && <div className="session-rest-current"><span className="eyebrow">Descanso em andamento</span><strong role="timer" aria-live="off">{clock(timer.remaining)}</strong><Button variant="ghost" onClick={timer.stop}>Encerrar descanso</Button></div>}
           <label className="session-auto-rest">
@@ -41,7 +41,7 @@ export default function RestTimer({ timer, open, onOpenChange, autoRest, onAutoR
             <input type="checkbox" role="switch" checked={autoRest} onChange={event => onAutoRestChange(event.target.checked)} />
           </label>
           <div className="field"><span>Duração do descanso</span>
-            <SegmentedControl value={preset} onChange={setPreset} options={[{ value: '30', label: '30s' }, { value: '60', label: '60s' }, { value: '90', label: '90s' }, { value: '120', label: '2min' }, { value: 'custom', label: 'Outro' }]} />
+            <SegmentedControl label="Duração do descanso" value={preset} onChange={setPreset} options={[{ value: '30', label: '30s' }, { value: '60', label: '60s' }, { value: '90', label: '90s' }, { value: '120', label: '2min' }, { value: 'custom', label: 'Outro' }]} />
           </div>
           {preset === 'custom' && <label className="field" htmlFor="session-custom-rest">Personalizado (segundos)
             <input className="input" id="session-custom-rest" type="number" inputMode="numeric" min={1} max={3600} step={1} value={custom} onChange={event => setCustom(event.target.value)} aria-describedby="session-rest-help" />

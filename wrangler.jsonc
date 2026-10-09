@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "marifitnnes-api",
+  "preview_urls": false,
+  "account_id": "c298c1122d9f24c1536110100b974559",
+  "main": "worker/index.ts",
+  "rules": [{"type":"Data","globs":["**/*.jpg"],"fallthrough":true}],
+  "compatibility_date": "2026-10-02",
+  "assets": {"directory": "./dist", "binding": "ASSETS", "not_found_handling": "single-page-application", "run_worker_first": ["/api/*"]},
+  "d1_databases": [{"binding":"DB","database_name":"marifitnnes-db","database_id":"8acf65fe-a6ed-42df-86af-85ff76d31180","migrations_dir":"worker/migrations"}],
+  "r2_buckets": [{"binding":"PDFS","bucket_name":"marifitnnes-pdfs"}],
+  "vars": {"GEMINI_MODEL":"gemini-3.5-flash-lite","GOOGLE_CLIENT_ID":"591036793719-vnk1uov7j7miags218hkgbhaoepn7iq5.apps.googleusercontent.com"},
+  "observability": {"enabled":false}
+}

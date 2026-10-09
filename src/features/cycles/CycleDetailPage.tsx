@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { ArrowLeftRight, ChevronRight, FileBarChart, Layers3, Upload } from 'lucide-react';
+import { ArrowLeftRight, ChevronRight, FileBarChart, Layers3 } from 'lucide-react';
 import { toast } from 'sonner';
 import { Badge, Button, EmptyState, SegmentedControl, Sheet, TopBar } from '../../components/ui';
 import { useAppStore } from '../../stores/use-app-store';
@@ -44,9 +44,8 @@ export default function CycleDetailPage() {
       {cycleWorkouts.length ? <div className="history-list">{cycleWorkouts.map(w => <Link className="cycles-list-item" key={w.id} to={`/app/workouts/${w.id}`}>
         <div><strong>{w.name}</strong><p>{w.subtitle}</p><span>{w.exerciseIds.length} exercícios · Ver exercícios</span></div><ChevronRight size={17} /></Link>)}</div>
         : <EmptyState icon={<Layers3 />} title={sessions.length ? 'Os registros continuam aqui' : 'Seu ciclo está pronto'}
-          description={sessions.length ? 'Não há modelos de treino vinculados a este ciclo. Suas sessões e séries estão preservadas na aba Sessões.' : 'Adicione seu primeiro treino para começar. Você também pode deixar este ciclo vazio por enquanto.'}
-          action={sessions.length ? <Button variant="secondary" size="sm" onClick={() => setTab('sessions')}>Ver sessões</Button> : <Link className="text-link" to={`/app/workouts/import?cycleId=${encodeURIComponent(cycle.id)}`}>Importar treino</Link>} />}
-      {cycleWorkouts.length > 0 && <div className="history-more"><Link className="text-link small" to={`/app/workouts/import?cycleId=${encodeURIComponent(cycle.id)}`}><Upload size={15} /> Adicionar treino</Link></div>}
+          description={sessions.length ? 'Não há modelos de treino vinculados a este ciclo. Suas sessões e séries estão preservadas na aba Sessões.' : 'Adicione seus treinos depois ou deixe este ciclo vazio por enquanto.'}
+          action={sessions.length ? <Button variant="secondary" size="sm" onClick={() => setTab('sessions')}>Ver sessões</Button> : undefined} />}
     </> : <>
       {!sessions.length ? <EmptyState title="Ainda sem sessões" description="Os treinos finalizados deste ciclo aparecerão aqui." /> : <div className="history-list">{sessions.slice(0, limit).map(s => <Link className="cycles-list-item" key={s.id} to={`/app/history/session/${s.id}`}>
         <div><strong>{s.workoutName}</strong><p>{dateLabel(s.startedAt, { day: 'numeric', month: 'short', year: 'numeric' })} · {duration(s.elapsedTime)}</p><span>{sessionSetCount(s)} séries feitas</span></div><ChevronRight size={17} /></Link>)}</div>}

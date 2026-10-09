@@ -50,11 +50,11 @@ export default function ProgressPage() {
 
   return <div className="page progress-page">
     <TopBar title="Evolução" eyebrow="Seu ritmo, seus resultados" action={<IconButton label="Comparar ciclos" onClick={() => setCompare(true)}><ArrowLeftRight size={19} /></IconButton>} />
-    <div className="progress-period"><SegmentedControl value={period} onChange={v => setPeriod(v as Period)} options={periodOptions} /></div>
+    <div className="progress-period"><SegmentedControl label="Período da evolução" value={period} onChange={v => setPeriod(v as Period)} options={periodOptions} /></div>
     {!all.length ? <EmptyState icon={<TrendingUp />} title="O primeiro passo vira progresso"
       description="Seus gráficos aparecem após finalizar um treino. Nenhuma estimativa substitui o que você registrou."
       action={<Link className="text-link" to="/app/workouts">Começar um treino</Link>} /> : <>
-      <div className="progress-tabs"><SegmentedControl value={tab} onChange={setTab} options={[
+      <div className="progress-tabs"><SegmentedControl label="Indicador de evolução" value={tab} onChange={setTab} options={[
         { value: 'overview', label: 'Visão geral' }, { value: 'load', label: 'Carga' },
         { value: 'time', label: 'Tempo' }, { value: 'consistency', label: 'Constância' },
       ]} /></div>

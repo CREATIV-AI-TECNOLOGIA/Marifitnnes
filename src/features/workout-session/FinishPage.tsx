@@ -65,9 +65,9 @@ function FinishFlow({ session }: { session: TrainingSession }) {
       <h1>{needsConfirmation ? 'Cada série conta.' : 'Último detalhe.'}</h1>
       <p className="muted">{summary.completedSets} de {summary.totalSets} séries realizadas. {needsConfirmation ? 'Você decide se quer continuar ou salvar o que fez até aqui.' : 'Uma única nota para o treino inteiro, só se quiser.'}</p>
       {!needsConfirmation && <form className="stack session-note-form" onSubmit={event => { event.preventDefault(); saveSession(); }}>
-        {incomplete.length > 0 && <p className="session-partial-note small"><CircleAlert size={16} />{incomplete.length} {incomplete.length === 1 ? 'exercício será registrado como não concluído' : 'exercícios serão registrados como não concluídos'}. As séries feitas serão preservadas.</p>}
+        {incomplete.length > 0 && <p className="session-partial-note small"><CircleAlert size={16} /><span>{incomplete.length} {incomplete.length === 1 ? 'exercício não concluído' : 'exercícios não concluídos'}. Séries feitas preservadas.</span></p>}
         <label className="field" htmlFor="session-general-note">Como foi o treino? <span className="muted small">Opcional</span>
-          <textarea className="input session-note" id="session-general-note" rows={5} maxLength={2000} value={note} placeholder="Energia, execução, como você se sentiu..." onChange={event => {
+          <textarea className="input session-note" id="session-general-note" rows={3} maxLength={2000} value={note} placeholder="Energia, execução, como você se sentiu..." onChange={event => {
             const value = event.target.value;
             setNote(value);
             try { localStorage.setItem(noteKey, value); } catch { /* Keep the note editable without storage. */ }
@@ -84,7 +84,7 @@ function FinishFlow({ session }: { session: TrainingSession }) {
   </div>;
 }
 
-function FinishedSummary({ session }: { session: TrainingSession }) {
+export function FinishedSummary({ session }: { session: TrainingSession }) {
   const preferences = useAppStore(state => state.preferences);
   const history = useAppStore(state => state.history);
   const definitions = useAppStore(state => state.exercises);
@@ -105,7 +105,7 @@ function FinishedSummary({ session }: { session: TrainingSession }) {
       <p className="session-volume-help small muted">Volume = carga × repetições, apenas das séries concluídas.</p>
       {records.length > 0 && <section className="session-records" aria-label="Novos recordes de carga"><div className="row"><Trophy size={20} /><h2>{records.length === 1 ? 'Novo recorde de carga' : 'Novos recordes de carga'}</h2></div>{records.map(record => <p key={record.id}><strong>{record.name}</strong><span>{number(toDisplayWeight(record.weight, preferences.unit))} {preferences.unit}<small className="muted">Anterior: {number(toDisplayWeight(record.previousBest, preferences.unit))} {preferences.unit}</small></span></p>)}</section>}
       {session.notes && <section className="session-summary-note"><h2>Sua nota</h2><p>{session.notes}</p></section>}
-      <div className="stack session-summary-links"><Link className="session-primary-link" to={`/app/history/${encodeURIComponent(session.id)}`}>Ver detalhes no histórico <ArrowRight size={18} /></Link><Link className="session-home-link" to="/app">Voltar ao início</Link></div>
+      <div className="stack session-summary-links"><Link className="session-primary-link" to={`/app/history/session/${encodeURIComponent(session.id)}`}>Ver detalhes no histórico <ArrowRight size={18} /></Link><Link className="session-home-link" to="/app">Voltar ao início</Link></div>
     </section>
   </div>;
 }

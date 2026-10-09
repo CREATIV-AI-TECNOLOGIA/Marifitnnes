@@ -8,8 +8,7 @@ import WorkoutsPage from '../../features/workouts/WorkoutsPage';
 import WorkoutDetailPage from '../../features/workouts/WorkoutDetailPage';
 import { PageSkeleton } from '../../components/ui';
 
-const ImportPage = lazy(() => import('../../features/imports/ImportPage'));
-const ReviewPage = lazy(() => import('../../features/imports/ReviewPage'));
+const ObjectivePage = lazy(() => import('../../features/objectives/ObjectivePage'));
 const AgendaPage = lazy(() => import('../../features/agenda/AgendaPage'));
 const BuilderPage = lazy(() => import('../../features/workout-builder/BuilderPage'));
 const SessionPage = lazy(() => import('../../features/workout-session/SessionPage'));
@@ -22,6 +21,8 @@ const CyclesPage = lazy(() => import('../../features/cycles/CyclesPage'));
 const CycleDetailPage = lazy(() => import('../../features/cycles/CycleDetailPage'));
 const ProfilePage = lazy(() => import('../../features/profile/ProfilePage'));
 const SettingsPage = lazy(() => import('../../features/profile/SettingsPage'));
+const ImportPage = lazy(() => import('../../features/imports/ImportPage'));
+const ReviewPage = lazy(() => import('../../features/imports/ReviewPage'));
 
 export default function AppRoutes() {
   return (
@@ -33,10 +34,12 @@ export default function AppRoutes() {
         <Route path="/app" element={<AppShell />}>
           <Route index element={<Navigate to="/app/home" replace />} />
           <Route path="home" element={<HomePage />} />
+          <Route path="objectives/:id" element={<ObjectivePage />} />
           <Route path="agenda" element={<AgendaPage />} />
           <Route path="workouts" element={<WorkoutsPage />} />
           <Route path="workouts/import" element={<ImportPage />} />
           <Route path="workouts/import/review" element={<ReviewPage />} />
+          <Route path="sources/:id" element={<Navigate to="/app/workouts" replace />} />
           <Route path="workouts/builder" element={<BuilderPage />} />
           <Route path="workouts/:id" element={<WorkoutDetailPage />} />
           <Route path="session/:id" element={<SessionPage />} />

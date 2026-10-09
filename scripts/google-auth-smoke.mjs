@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';
+const base=process.env.CLOUD_TEST_URL??'http://127.0.0.1:8789';
+const headers={Origin:base,'Content-Type':'application/json'};
+const config=await fetch(base+'/api/auth/google/config',{method:'POST',headers,body:'{}'});
+assert.equal(config.status,200);const value=await config.json();assert.equal(value.enabled,true);
+const cookie=config.headers.get('set-cookie').split(';')[0];
+assert.equal((await fetch(base+'/api/auth/google/config',{method:'POST',headers:{...headers,Origin:'https://other.example'},body:'{}'})).status,403);
+assert.equal((await fetch(base+'/api/auth/google/config',{method:'POST',headers,body:'{"link":true}'})).status,401);
+const fakeToken='eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJmYWtlIn0.invalid';
+const result=await fetch(base+'/api/auth/google',{method:'POST',headers:{...headers,Cookie:cookie},body:JSON.stringify({credential:fakeToken})});
+assert.equal(result.status,401);assert.equal((await result.json()).code,'GOOGLE_INVALIDO');
+const replay=await fetch(base+'/api/auth/google',{method:'POST',headers:{...headers,Cookie:cookie},body:JSON.stringify({credential:fakeToken})});
+assert.equal(replay.status,401);assert.equal((await replay.json()).code,'GOOGLE_TENTATIVA_EXPIRADA');
+console.log(JSON.stringify({ok:true,checks:['desafio Google emitido','CSRF recusado','vinculação exige sessão','token falso recusado','tentativa consumida uma única vez']}));

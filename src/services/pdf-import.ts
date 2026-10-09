@@ -1,6 +1,7 @@
 import { GlobalWorkerOptions, getDocument } from 'pdfjs-dist';
 import workerUrl from 'pdfjs-dist/build/pdf.worker.min.mjs?url';
-import { parseTrainingAgenda } from './agenda-parser';
+import { preparePdfImport, sanitizeSourceText, verifiedSources } from './pdf-content';
+import type { SourcePage } from '../types';
 
 GlobalWorkerOptions.workerSrc = workerUrl;
 
@@ -29,33 +30,48 @@ function pageLines(items: unknown[]) {
     .filter(Boolean);
 }
 
-export async function processPdf(file: File, onProgress: (step: number) => void) {
+export async function processPdf(file: File, onProgress: (read: number, total: number) => void) {
   if (!file.name.toLowerCase().endsWith('.pdf') && file.type !== 'application/pdf') {
     throw new Error('ARQUIVO_INVALIDO');
   }
   if (file.size > 20 * 1024 * 1024) throw new Error('ARQUIVO_GRANDE');
 
+  const bytes = await file.arrayBuffer();
+  if (new TextDecoder().decode(bytes.slice(0, 5)) !== '%PDF-') throw new Error('ARQUIVO_INVALIDO');
+  const sha256 = Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', bytes)))
+    .map(byte => byte.toString(16).padStart(2, '0')).join('');
+  const verified = verifiedSources.find(source => source.sha256 === sha256);
+  if (verified) {
+    onProgress(verified.pageCount, verified.pageCount);
+    return preparePdfImport({ ...verified, name: file.name });
+  }
   const task = getDocument({
-    data: new Uint8Array(await file.arrayBuffer()),
+    data: new Uint8Array(bytes),
     useSystemFonts: true,
   });
 
   try {
     const document = await task.promise;
     if (document.numPages > 40) throw new Error('PDF_MUITAS_PAGINAS');
-    const pages: string[] = [];
-    onProgress(1);
+    const pages: SourcePage[] = [];
+    onProgress(0, document.numPages);
     for (let pageNumber = 1; pageNumber <= document.numPages; pageNumber++) {
       const page = await document.getPage(pageNumber);
       const content = await page.getTextContent();
-      pages.push(pageLines(content.items).join('\n'));
+      const annotations = await page.getAnnotations();
+      pages.push({
+        number: pageNumber,
+        text: sanitizeSourceText(pageLines(content.items).join('\n')),
+        links: [...new Set(annotations.flatMap(annotation => {
+          const url: unknown = annotation.url;
+          return typeof url === 'string' && /^https?:\/\//i.test(url) ? [url] : [];
+        }))],
+      });
       page.cleanup();
-      onProgress(1 + Math.floor(pageNumber / document.numPages * 2));
+      onProgress(pageNumber, document.numPages);
     }
-    onProgress(3);
-    const draft = parseTrainingAgenda(file.name, pages);
-    onProgress(4);
-    return draft;
+    if (pages.every(page => !page.text.trim())) throw new Error('PDF_SEM_TEXTO');
+    return preparePdfImport({ id: sha256, name: file.name, kind: 'workout', sha256, pageCount: document.numPages, pages });
   } finally {
     await task.destroy();
   }
